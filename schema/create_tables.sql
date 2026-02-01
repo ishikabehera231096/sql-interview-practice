@@ -2,7 +2,7 @@
 -- Categories
 -- =========================
 CREATE TABLE Categories (
-    CategoryID SERIAL PRIMARY KEY,
+    CategoryID INTEGER PRIMARY KEY,
     CategoryName VARCHAR(50),
     Description TEXT
 );
@@ -28,7 +28,7 @@ CREATE TABLE Customers (
 -- Employees
 -- =========================
 CREATE TABLE Employees (
-    EmployeeID SERIAL PRIMARY KEY,
+    EmployeeID INTEGER PRIMARY KEY,
     LastName VARCHAR(50),
     FirstName VARCHAR(50),
     Title VARCHAR(50),
@@ -50,7 +50,7 @@ CREATE TABLE Employees (
 -- Shippers
 -- =========================
 CREATE TABLE Shippers (
-    ShipperID SERIAL PRIMARY KEY,
+    ShipperID INTEGER PRIMARY KEY,
     CompanyName VARCHAR(50),
     Phone VARCHAR(30)
 );
@@ -59,7 +59,7 @@ CREATE TABLE Shippers (
 -- Suppliers
 -- =========================
 CREATE TABLE Suppliers (
-    SupplierID SERIAL PRIMARY KEY,
+    SupplierID INTEGER PRIMARY KEY,
     CompanyName VARCHAR(50),
     ContactName VARCHAR(50),
     ContactTitle VARCHAR(50),
@@ -77,7 +77,7 @@ CREATE TABLE Suppliers (
 -- Products
 -- =========================
 CREATE TABLE Products (
-    ProductID SERIAL PRIMARY KEY,
+    ProductID INTEGER PRIMARY KEY,
     ProductName VARCHAR(50),
     SupplierID INTEGER REFERENCES Suppliers(SupplierID),
     CategoryID INTEGER REFERENCES Categories(CategoryID),
@@ -93,7 +93,7 @@ CREATE TABLE Products (
 -- Orders
 -- =========================
 CREATE TABLE Orders (
-    OrderID SERIAL PRIMARY KEY,
+    OrderID INTEGER PRIMARY KEY,
     CustomerID CHAR(5) REFERENCES Customers(CustomerID),
     EmployeeID INTEGER REFERENCES Employees(EmployeeID),
     OrderDate DATE,
