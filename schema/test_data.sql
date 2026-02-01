@@ -1,11 +1,28 @@
-select *
-from customers;
+SELECT *
+FROM Categories;
 
-select *
-from orders;
+SELECT *
+FROM Customers;
 
-select *
-from products;
+SELECT *
+FROM Employees;
 
-select *
-from order_items;
+SELECT *
+FROM Shippers;
+
+SELECT *
+FROM Suppliers;
+
+SELECT *
+FROM Products;
+
+SELECT *
+FROM Orders;
+
+SELECT *
+FROM OrderDetails;
+
+SELECT *
+FROM CustomerGroupThresholds;
+
+

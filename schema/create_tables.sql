@@ -1,29 +1,131 @@
-CREATE TABLE customers(
-    customer_id INTEGER PRIMARY KEY,
-    customer_name TEXT,
-    signup_date DATE,
-    country TEXT
+-- =========================
+-- Categories
+-- =========================
+CREATE TABLE Categories (
+    CategoryID SERIAL PRIMARY KEY,
+    CategoryName VARCHAR(50),
+    Description TEXT
 );
 
-CREATE TABLE orders(
-    order_id INTEGER PRIMARY KEY,
-    customer_id INTEGER,
-    order_date DATE,
-    status TEXT,
-    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+-- =========================
+-- Customers
+-- =========================
+CREATE TABLE Customers (
+    CustomerID CHAR(5) PRIMARY KEY,
+    CompanyName VARCHAR(50),
+    ContactName VARCHAR(50),
+    ContactTitle VARCHAR(50),
+    Address VARCHAR(100),
+    City VARCHAR(50),
+    Region VARCHAR(50),
+    PostalCode VARCHAR(20),
+    Country VARCHAR(50),
+    Phone VARCHAR(30),
+    Fax VARCHAR(30)
 );
 
-CREATE TABLE order_items(
-    order_item_id INTEGER PRIMARY KEY,
-    order_id INTEGER,
-    product_id INTEGER,
-    quantity INTEGER,
-    unit_price REAL,
-    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+-- =========================
+-- Employees
+-- =========================
+CREATE TABLE Employees (
+    EmployeeID SERIAL PRIMARY KEY,
+    LastName VARCHAR(50),
+    FirstName VARCHAR(50),
+    Title VARCHAR(50),
+    TitleOfCourtesy VARCHAR(10),
+    BirthDate DATE,
+    HireDate DATE,
+    Address VARCHAR(100),
+    City VARCHAR(50),
+    Region VARCHAR(50),
+    PostalCode VARCHAR(20),
+    Country VARCHAR(50),
+    HomePhone VARCHAR(30),
+    Extension VARCHAR(10),
+    Notes TEXT,
+    ReportsTo INTEGER REFERENCES Employees(EmployeeID)
 );
 
-CREATE TABLE products(
-    product_id INTEGER PRIMARY KEY,
-    product_name TEXT,
-    category TEXT
+-- =========================
+-- Shippers
+-- =========================
+CREATE TABLE Shippers (
+    ShipperID SERIAL PRIMARY KEY,
+    CompanyName VARCHAR(50),
+    Phone VARCHAR(30)
+);
+
+-- =========================
+-- Suppliers
+-- =========================
+CREATE TABLE Suppliers (
+    SupplierID SERIAL PRIMARY KEY,
+    CompanyName VARCHAR(50),
+    ContactName VARCHAR(50),
+    ContactTitle VARCHAR(50),
+    Address VARCHAR(100),
+    City VARCHAR(50),
+    Region VARCHAR(50),
+    PostalCode VARCHAR(20),
+    Country VARCHAR(50),
+    Phone VARCHAR(30),
+    Fax VARCHAR(30),
+    HomePage TEXT
+);
+
+-- =========================
+-- Products
+-- =========================
+CREATE TABLE Products (
+    ProductID SERIAL PRIMARY KEY,
+    ProductName VARCHAR(50),
+    SupplierID INTEGER REFERENCES Suppliers(SupplierID),
+    CategoryID INTEGER REFERENCES Categories(CategoryID),
+    QuantityPerUnit VARCHAR(50),
+    UnitPrice DECIMAL(10,2),
+    UnitsInStock INTEGER,
+    UnitsOnOrder INTEGER,
+    ReorderLevel INTEGER,
+    Discontinued BOOLEAN
+);
+
+-- =========================
+-- Orders
+-- =========================
+CREATE TABLE Orders (
+    OrderID SERIAL PRIMARY KEY,
+    CustomerID CHAR(5) REFERENCES Customers(CustomerID),
+    EmployeeID INTEGER REFERENCES Employees(EmployeeID),
+    OrderDate DATE,
+    RequiredDate DATE,
+    ShippedDate DATE,
+    ShipVia INTEGER REFERENCES Shippers(ShipperID),
+    Freight DECIMAL(10,2),
+    ShipName VARCHAR(50),
+    ShipAddress VARCHAR(100),
+    ShipCity VARCHAR(50),
+    ShipRegion VARCHAR(50),
+    ShipPostalCode VARCHAR(20),
+    ShipCountry VARCHAR(50)
+);
+
+-- =========================
+-- OrderDetails
+-- =========================
+CREATE TABLE OrderDetails (
+    OrderID INTEGER REFERENCES Orders(OrderID),
+    ProductID INTEGER REFERENCES Products(ProductID),
+    UnitPrice DECIMAL(10,2),
+    Quantity INTEGER,
+    Discount DECIMAL(4,2),
+    PRIMARY KEY (OrderID, ProductID)
+);
+
+-- =========================
+-- CustomerGroupThresholds
+-- =========================
+CREATE TABLE CustomerGroupThresholds (
+    CustomerGroupName VARCHAR(20),
+    RangeBottom DECIMAL(10,2),
+    RangeTop DECIMAL(10,2)
 );
