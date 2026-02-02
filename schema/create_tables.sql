@@ -118,8 +118,13 @@ CREATE TABLE OrderDetails (
     UnitPrice DECIMAL(10,2),
     Quantity INTEGER,
     Discount DECIMAL(4,2),
+    LineTotal DECIMAL(10,2),
     PRIMARY KEY (OrderID, ProductID)
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
+
+
 
 -- =========================
 -- CustomerGroupThresholds

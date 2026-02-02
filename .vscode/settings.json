@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "SQLite Interview Practice ",
+            "group": "Practice",
+            "database": "${workspaceFolder:sql-interview-practice}/interview.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
