@@ -20,3 +20,8 @@ The schema simulates a simple e-commerce system with:
 - orders
 - order_items
 - products
+- shipper
+- Categories
+- Employees
+- Customer Group Thresholds
+- Suppliers

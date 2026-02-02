@@ -1000,3 +1000,8 @@ INSERT INTO CustomerGroupThresholds VALUES
 (1, 'Retail', 1000.00),
 (2, 'Wholesale', 5000.00),
 (3, 'VIP', 20000.00);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 3894635b5eacd5fb2e04c578b9d535abbd745a1d
